@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceSecurity - Soluciones de Seguridad con IA</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -11,90 +15,96 @@
             --secondary: #FFFFFF;
             --accent: #FF6B00;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
+
         body {
             color: var(--primary);
             line-height: 1.6;
+            padding-top: 70px;
+            /* Para compensar el navbar fijo */
         }
-        
-        /* Header */
-        header {
-            background-color: var(--secondary);
+
+        /* Header Styles */
+        .navbar {
+            background-color: var(--secondary) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
             position: fixed;
             width: 100%;
+            top: 0;
             z-index: 1000;
         }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .logo {
+
+        .navbar-brand {
             display: flex;
             align-items: center;
         }
-        
-        .logo img {
+
+        .navbar-brand img {
             height: 40px;
             margin-right: 10px;
         }
-        
-        .logo h1 {
-            font-size: 1.8rem;
+
+        .navbar-brand h1 {
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
+            margin: 0;
         }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--primary);
+
+        .nav-link {
+            color: var(--primary) !important;
             font-weight: 600;
-            transition: color 0.3s;
+            padding: 8px 15px !important;
         }
-        
-        .nav-links a:hover {
-            color: var(--accent);
+
+        .nav-link:hover {
+            color: var(--accent) !important;
         }
-        
-        .btn {
-            display: inline-block;
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%284, 60, 92, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .btn-primary-custom {
             background-color: var(--primary);
             color: var(--secondary);
-            padding: 0.7rem 1.5rem;
             border-radius: 30px;
-            text-decoration: none;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--accent);
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-custom {
+            background-color: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 30px;
+            padding: 8px 20px;
             font-weight: 600;
             transition: all 0.3s;
         }
-        
-        .btn:hover {
-            background-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+        .btn-outline-custom:hover {
+            background-color: var(--secondary);
+            color: var(--primary);
         }
-        
+
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(4, 60, 92, 0.8), rgba(4, 60, 92, 0.8)), url('https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
@@ -107,157 +117,107 @@
             color: var(--secondary);
             padding: 0 5%;
         }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
+
         .hero h2 {
             font-size: 3rem;
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
-        
+
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
         }
-        
-        .hero-btns {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--secondary);
-            color: var(--primary);
-        }
-        
+
         /* Features Section */
         .features {
-            padding: 5rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 5rem 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
         }
-        
+
         .section-title h2 {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1rem;
         }
-        
+
         .section-title p {
             color: #666;
             max-width: 700px;
             margin: 0 auto;
         }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
+
         .feature-card {
             background-color: var(--secondary);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         .feature-icon {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
         }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
+
         /* About Section */
         .about {
             background-color: #f9f9f9;
-            padding: 5rem 5%;
+            padding: 5rem 0;
         }
-        
-        .about-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
+
         .about-text h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
             color: var(--primary);
         }
-        
+
         .about-text p {
             margin-bottom: 1.5rem;
             color: #555;
         }
-        
+
         .about-image img {
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        
+
         /* Testimonials */
         .testimonials {
-            padding: 5rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 5rem 0;
         }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
+
         .testimonial-card {
             background-color: var(--secondary);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
         }
-        
+
         .testimonial-text {
             font-style: italic;
             margin-bottom: 1.5rem;
             color: #555;
         }
-        
+
         .testimonial-author {
             display: flex;
             align-items: center;
         }
-        
+
         .testimonial-author img {
             width: 50px;
             height: 50px;
@@ -265,62 +225,50 @@
             object-fit: cover;
             margin-right: 1rem;
         }
-        
+
         .author-info h4 {
             color: var(--primary);
         }
-        
+
         .author-info p {
             color: #777;
             font-size: 0.9rem;
         }
-        
+
         /* Contact Section */
         .contact {
             background-color: var(--primary);
             color: var(--secondary);
-            padding: 5rem 5%;
+            padding: 5rem 0;
         }
-        
-        .contact-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-        
+
         .contact-info h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
-        
+
         .contact-info p {
             margin-bottom: 2rem;
             opacity: 0.9;
         }
-        
-        .contact-details {
-            margin-bottom: 2rem;
-        }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 1rem;
         }
-        
+
         .contact-icon {
             font-size: 1.2rem;
             margin-right: 1rem;
             color: var(--accent);
         }
-        
+
         .social-links {
             display: flex;
             gap: 1rem;
         }
-        
+
         .social-link {
             display: flex;
             align-items: center;
@@ -333,22 +281,12 @@
             font-size: 1.2rem;
             transition: all 0.3s;
         }
-        
+
         .social-link:hover {
             background-color: var(--accent);
             transform: translateY(-3px);
         }
-        
-        .contact-form .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
+
         .contact-form input,
         .contact-form textarea {
             width: 100%;
@@ -359,28 +297,17 @@
             color: var(--secondary);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+
         .contact-form input::placeholder,
         .contact-form textarea::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
-        
+
         .contact-form textarea {
             height: 150px;
             resize: vertical;
         }
-        
-        .contact-form .btn {
-            width: 100%;
-            background-color: var(--accent);
-            border: none;
-            cursor: pointer;
-        }
-        
-        .contact-form .btn:hover {
-            background-color: #e05d00;
-        }
-        
+
         /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
@@ -400,262 +327,299 @@
             transition: all 0.3s;
             animation: pulse 2s infinite;
         }
-        
+
         .whatsapp-float:hover {
             transform: scale(1.1);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
-        
+
         @keyframes pulse {
             0% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
             }
+
             70% {
                 box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
             }
         }
-        
+
         /* Footer */
         footer {
             background-color: #02283A;
             color: var(--secondary);
-            padding: 3rem 5%;
+            padding: 3rem 0;
             text-align: center;
         }
-        
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        .footer-logo {
-            margin-bottom: 2rem;
-        }
-        
+
         .footer-logo img {
             height: 50px;
+            margin-bottom: 1.5rem;
         }
-        
+
         .footer-links {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
         }
-        
+
         .footer-links a {
             color: var(--secondary);
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: var(--accent);
         }
-        
+
         .copyright {
             opacity: 0.7;
             font-size: 0.9rem;
         }
-        
+
         /* Responsive */
         @media (max-width: 992px) {
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-image {
-                order: -1;
-            }
-            
             .hero h2 {
                 font-size: 2.5rem;
             }
         }
-        
+
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 1rem 5%;
-            }
-            
-            .logo {
-                margin-bottom: 1rem;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-            
-            .nav-links li {
-                margin: 0.5rem 0;
-            }
-            
-            .hero-btns {
-                flex-direction: column;
-            }
-            
             .hero h2 {
                 font-size: 2rem;
             }
-            
+
             .section-title h2 {
                 font-size: 2rem;
+            }
+
+            .navbar-brand h1 {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
+
 <body>
     <!-- WhatsApp Float -->
     <a href="https://wa.me/573138975212" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Header -->
+    <!-- Header con Bootstrap -->
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="https://via.placeholder.com/40x40/043C5C/FFFFFF?text=IS" alt="IceSecurity Logo">
-                <h1>IceSecurity</h1>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="img/logo.png" alt="IceSecurity Logo">
+                    <h1>IceSecurity</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#soluciones">Soluciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#nosotros">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#testimonios">Testimonios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contacto">Contacto</a>
+                        </li>
+                        <li class="nav-item d-lg-none d-xl-none">
+                            <a class="btn btn-primary-custom mt-2" href="https://wa.me/573138975212" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/573138975212" class="btn btn-primary-custom d-none d-lg-inline-block ms-3"
+                        target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#soluciones">Soluciones</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="https://wa.me/573138975212" class="btn" target="_blank">WhatsApp</a></li>
-            </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h2>Seguridad Inteligente para Ciudades más Seguras</h2>
-            <p>Nuestro sistema de reconocimiento facial con IA ayuda a las autoridades a prevenir delitos y proteger a los ciudadanos.</p>
-            <div class="hero-btns">
-                <a href="#contacto" class="btn">Contactar Ahora</a>
-                <a href="#soluciones" class="btn btn-secondary">Ver Soluciones</a>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2>Seguridad Inteligente para Ciudades más Seguras</h2>
+                    <p>Nuestro sistema de reconocimiento facial con IA ayuda a las autoridades a prevenir delitos y
+                        proteger a los ciudadanos.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#contacto" class="btn btn-primary-custom">Contactar Ahora</a>
+                        <a href="#soluciones" class="btn btn-outline-custom">Ver Soluciones</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
     <section class="features" id="soluciones">
-        <div class="section-title">
-            <h2>Nuestras Soluciones</h2>
-            <p>Tecnología de vanguardia diseñada para la seguridad ciudadana</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-camera"></i>
-                </div>
-                <h3>Reconocimiento Facial</h3>
-                <p>Sistema avanzado de identificación de rostros en tiempo real con una precisión del 98%.</p>
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras Soluciones</h2>
+                <p>Tecnología de vanguardia diseñada para la seguridad ciudadana</p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-brain"></i>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Reconocimiento Facial</h3>
+                        <p>Sistema avanzado de identificación de rostros en tiempo real con una precisión del 98%.</p>
+                    </div>
                 </div>
-                <h3>Inteligencia Artificial</h3>
-                <p>Algoritmos de aprendizaje automático que mejoran continuamente la detección de amenazas.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-database"></i>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Inteligencia Artificial</h3>
+                        <p>Algoritmos de aprendizaje automático que mejoran continuamente la detección de amenazas.</p>
+                    </div>
                 </div>
-                <h3>Integración con Bases de Datos</h3>
-                <p>Conexión directa con registros gubernamentales para identificación inmediata.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-bell"></i>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Integración con Bases de Datos</h3>
+                        <p>Conexión directa con registros gubernamentales para identificación inmediata.</p>
+                    </div>
                 </div>
-                <h3>Alertas Automáticas</h3>
-                <p>Notificaciones en tiempo real a las autoridades cuando se detecta un sospechoso.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3>Alertas Automáticas</h3>
+                        <p>Notificaciones en tiempo real a las autoridades cuando se detecta un sospechoso.</p>
+                    </div>
                 </div>
-                <h3>Analítica Predictiva</h3>
-                <p>Identificación de patrones para prevenir delitos antes de que ocurran.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analítica Predictiva</h3>
+                        <p>Identificación de patrones para prevenir delitos antes de que ocurran.</p>
+                    </div>
                 </div>
-                <h3>Plataforma Móvil</h3>
-                <p>Acceso remoto para autoridades desde cualquier dispositivo.</p>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Plataforma Móvil</h3>
+                        <p>Acceso remoto para autoridades desde cualquier dispositivo.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section class="about" id="nosotros">
-        <div class="about-content">
-            <div class="about-text">
-                <h2>Sobre IceSecurity</h2>
-                <p>Fundada en Bogotá, Colombia, IceSecurity es líder en soluciones tecnológicas para la seguridad ciudadana. Nuestro equipo combina experiencia en inteligencia artificial, desarrollo de software y seguridad pública.</p>
-                <p>Nuestra misión es reducir los índices de criminalidad mediante tecnología innovadora que empodere a las autoridades y proteja a los ciudadanos.</p>
-                <p>Actualmente trabajamos con 15 municipalidades en Colombia y hemos logrado reducir los delitos en un 35% en las zonas donde implementamos nuestro sistema.</p>
-                <a href="#contacto" class="btn">Conoce más</a>
-            </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Equipo IceSecurity">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="about-text">
+                        <h2>Sobre IceSecurity</h2>
+                        <p>Fundada en Bogotá, Colombia, IceSecurity es líder en soluciones tecnológicas para la
+                            seguridad ciudadana. Nuestro equipo combina experiencia en inteligencia artificial,
+                            desarrollo de software y seguridad pública.</p>
+                        <p>Nuestra misión es reducir los índices de criminalidad mediante tecnología innovadora que
+                            empodere a las autoridades y proteja a los ciudadanos.</p>
+                        <p>Actualmente trabajamos con 15 municipalidades en Colombia y hemos logrado reducir los delitos
+                            en un 35% en las zonas donde implementamos nuestro sistema.</p>
+                        <a href="#contacto" class="btn btn-primary-custom">Conoce más</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                            alt="Equipo IceSecurity" class="img-fluid">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonios">
-        <div class="section-title">
-            <h2>Lo que dicen nuestros clientes</h2>
-            <p>Testimonios de autoridades y socios que confían en nuestra tecnología</p>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "Desde que implementamos el sistema de IceSecurity, hemos reducido los robos en un 40% en nuestro municipio. La tecnología de reconocimiento facial ha sido clave para identificar y capturar a varios delincuentes buscados."
-                </div>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alcalde Juan Pérez">
-                    <div class="author-info">
-                        <h4>Alcalde Juan Pérez</h4>
-                        <p>Municipio de Chía, Cundinamarca</p>
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p>Testimonios de autoridades y socios que confían en nuestra tecnología</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Desde que implementamos el sistema de IceSecurity, hemos reducido los robos en un 40% en
+                            nuestro municipio. La tecnología de reconocimiento facial ha sido clave para identificar y
+                            capturar a varios delincuentes buscados."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alcalde Juan Pérez">
+                            <div class="author-info">
+                                <h4>Alcalde Juan Pérez</h4>
+                                <p>Municipio de Chía, Cundinamarca</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "La integración con nuestras bases de datos fue impecable. El sistema de IceSecurity ha mejorado significativamente nuestra capacidad de respuesta ante emergencias y ha optimizado nuestros recursos policiales."
-                </div>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coronel María Gómez">
-                    <div class="author-info">
-                        <h4>Coronel María Gómez</h4>
-                        <p>Policía Nacional de Colombia</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "La integración con nuestras bases de datos fue impecable. El sistema de IceSecurity ha
+                            mejorado significativamente nuestra capacidad de respuesta ante emergencias y ha optimizado
+                            nuestros recursos policiales."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Coronel María Gómez">
+                            <div class="author-info">
+                                <h4>Coronel María Gómez</h4>
+                                <p>Policía Nacional de Colombia</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "Como empresario, valoraba la seguridad de mi negocio. IceSecurity no solo protegió mi almacén, sino que ayudó a desarticular una banda de ladrones que operaba en la zona. La inversión valió cada peso."
-                </div>
-                <div class="testimonial-author">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Carlos Rodríguez">
-                    <div class="author-info">
-                        <h4>Carlos Rodríguez</h4>
-                        <p>Empresario, Bogotá</p>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Como empresario, valoraba la seguridad de mi negocio. IceSecurity no solo protegió mi
+                            almacén, sino que ayudó a desarticular una banda de ladrones que operaba en la zona. La
+                            inversión valió cada peso."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Carlos Rodríguez">
+                            <div class="author-info">
+                                <h4>Carlos Rodríguez</h4>
+                                <p>Empresario, Bogotá</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -664,65 +628,70 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contacto">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Contáctanos</h2>
-                <p>¿Listo para llevar la seguridad de tu ciudad o negocio al siguiente nivel? Estamos aquí para ayudarte.</p>
-                
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        <span>Calle 123 #45-67, Bogotá, Colombia</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-phone"></i></span>
-                        <span>+57 313 8975212</span>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon"><i class="fas fa-envelope"></i></span>
-                        <span>contacto@icesecurity.com</span>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h2>Contáctanos</h2>
+                        <p>¿Listo para llevar la seguridad de tu ciudad o negocio al siguiente nivel? Estamos aquí para
+                            ayudarte.</p>
+
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                <span>Calle 123 #45-67, Bogotá, Colombia</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                                <span>+57 313 8975212</span>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                                <span>contacto@icesecurity.com</span>
+                            </div>
+                        </div>
+
+                        <p>Síguenos en redes sociales:</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
-                
-                <p>Síguenos en redes sociales:</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tu nombre completo"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" placeholder="tu@email.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+57 300 1234567">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mensaje</label>
+                                <textarea class="form-control" id="message" rows="5"
+                                    placeholder="Cuéntanos sobre tu proyecto de seguridad..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary-custom w-100">Enviar Mensaje</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="contact-form">
-                <form>
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" id="name" placeholder="Tu nombre completo" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="email" id="email" placeholder="tu@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <input type="tel" id="phone" placeholder="+57 300 1234567">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" placeholder="Cuéntanos sobre tu proyecto de seguridad..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Enviar Mensaje</button>
-                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="https://via.placeholder.com/150x50/043C5C/FFFFFF?text=IceSecurity" alt="IceSecurity Logo">
-            </div>
+        <div class="container">
             <div class="footer-links">
                 <a href="#inicio">Inicio</a>
                 <a href="#soluciones">Soluciones</a>
@@ -738,25 +707,38 @@
         </div>
     </footer>
 
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
+                // Cierra el menú móvil si está abierto
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse.classList.contains('show')) {
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                    bsCollapse.hide();
+                }
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
-        
+
         // Form submission
         const form = document.querySelector('.contact-form form');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
-            form.reset();
-        });
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+                form.reset();
+            });
+        }
     </script>
 </body>
+
 </html>
